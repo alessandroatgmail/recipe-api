@@ -9,6 +9,7 @@ CREATE_USER_URL = reverse('users:create')
 TOKEN_URL = reverse('users:token')
 ME_URL = reverse('users:me')
 
+
 def create_user(**params):
     return get_user_model().objects.create_user(**params)
 
@@ -105,7 +106,7 @@ class PublicUserApiTests(TestCase):
 
 class PrivateUserApiTests(TestCase):
 
-    def setup():
+    def setUp(self):
         self.user = create_user(
             email='test@silv.io',
             password='pwd12345678',
@@ -113,7 +114,6 @@ class PrivateUserApiTests(TestCase):
         )
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
-        return self.user
 
     def test_retrive_profile_success(self):
         res = self.client.get(ME_URL)
