@@ -5,10 +5,13 @@ from recipe import views
 
 
 router = DefaultRouter()
-router.register('tags', views.TagViewSets)
+router.register('tag', views.TagViewSets)
+router.register('ingredients', views.IngredientViewSet)
 
 app_name = 'recipe'
 
 urlpatterns =[
-    path('', include(router.urls), name='tag-list')
+    path('', include(router.urls)),
+    # path('', include(router.urls))
+
 ]
